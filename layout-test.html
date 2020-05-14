@@ -1,0 +1,125 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+<style>
+body {
+  margin: 0px;
+}
+.main_div {
+  max-width: 80ch;
+  height: 100%;
+  margin: auto;
+  display:flex;
+  flex-flow: column nowrap;
+}
+.week {
+  flex: 5;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.day {
+  position: relative;
+  flex: 1;
+  border: 1px solid grey;
+}
+.timescale {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+.hour_in_scale {
+  width: 100%;
+  flex: 1;
+  border-top: 1px solid grey;
+  color: grey;
+  text-align: center;
+}
+.working_period {
+  position: absolute;
+  top: 100px;
+  height: 200px;
+  width: 90%;
+  left: 5%;
+  background: blue;
+  border-radius: 1ch;
+  box-shadow: 0 0 5px;
+}
+.top_handle {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  max-height: 50%;
+  text-align: center;
+  color: darkblue;
+  background: lightblue;
+  border-radius: 1ch 1ch 0ch 0ch;
+  cursor: ns-resize;
+}
+.bottom_handle {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  max-height: 50%;
+  text-align: center;
+  color: darkblue;
+  background: lightblue;
+  border-radius: 0ch 0ch 1ch 1ch;
+  cursor: ns-resize;
+}
+.break {
+  position: relative;
+  top: 50%;
+  height: 10%;
+  background: red;
+}
+.summary {
+  flex: 1;
+}
+</style>
+  </head>
+  <body>
+    <div class="main_div">
+      <div class="week">
+        <div class="day">
+          <div class="timescale">
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+            <div class="hour_in_scale">01:00</div>
+          </div>
+          <div class="working_period">
+            <div class="top_handle">
+              07:30
+            </div>
+            <div class="bottom_handle">
+              16:00
+            </div>
+          </div>
+        </div>
+        <div class="day"><div class="working_period"><div class="break"></div></div></div>
+        <div class="day"><div class="working_period"></div></div>
+        <div class="day"><div class="working_period"></div></div>
+        <div class="day"><div class="working_period"></div></div>
+      </div>
+      <div class="summary">
+        days summary...
+      </div>
+      <div class="summary">
+        summary...
+      </div>
+    </div>
+  </body>
+</html>
