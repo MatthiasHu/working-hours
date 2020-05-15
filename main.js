@@ -9,7 +9,7 @@ const scaleBounds =
 
 const breakTimesPrescription =
   [ {from: 6 * 60, minutes: 30}
-  , {from: 8 * 60, minutes: 45}
+  , {from: 9 * 60, minutes: 45}
   ];
 
 const minimalWorkDuration = 30;

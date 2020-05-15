@@ -60,7 +60,7 @@ body {
   left: 5%;
   right: 5%;
   color: darkred;
-  background: red;
+  background: lightgrey;
 }
 .days_summary {
   flex: 0 0 auto;
