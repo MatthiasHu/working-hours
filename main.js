@@ -24,6 +24,8 @@ const defaultInitialState =
       ]
   };
 
+const localStorageItemName = "working_hours_state";
+
 
 let ui =
   { week: null
@@ -45,10 +47,9 @@ function onLoad() {
 }
 
 function getInitialState() {
-  // TODO: load state from a cookie
-  const foundCookie = false;
-  if (foundCookie) {
-
+  const retrieved = localStorage.getItem(localStorageItemName);
+  if (retrieved != null) {
+    return JSON.parse(retrieved);
   }
   else {
     const periods = [];
@@ -245,6 +246,8 @@ function realizeState() {
   }
 
   ui.weekSummary.innerHTML = timeString(netSum);
+
+  localStorage.setItem(localStorageItemName, JSON.stringify(state));
 }
 
 function prescribedBreakDuration(workingPeriodDuration) {
