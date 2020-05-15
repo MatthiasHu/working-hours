@@ -70,7 +70,6 @@ function setupUI() {
   ui.weekSummary = get("week_summary");
 
   ui.week.appendChild(createDiv("vertical_line"));
-//  ui.daysSummary.appendChild(createDiv("vertical_line"));
 
   for (let d = 0; d < numberOfDays; d++) {
     const p = state.periods[d];
@@ -93,7 +92,6 @@ function setupUI() {
 
     const summary = createDaySummaryDiv()
     ui.daysSummary.appendChild(summary);
-//    ui.daysSummary.appendChild(createDiv("vertical_line"));
     ui.daySummaries.push(summary);
   }
 }
@@ -159,15 +157,22 @@ function createDaySummaryDiv() {
 }
 
 function setHandleEventHandlers(handleElement, getEdgeY, setTime) {
-  const onStart = (e) => {
+  const mouse = (handler) => (e) => {
     e.preventDefault();
-
-    let offset = getEdgeY() - e.clientY;
-
-    const onMove = (e) => {
+    handler(e.clientY);
+  };
+  const touch = (handler) => (e) => {
+    if (e.touches.length == 1) {
       e.preventDefault();
+      handler(e.touches[0].clientY);
+    }
+  };
 
-      const desiredEdgeY = e.clientY + offset;
+  const onStart = (clientY) => {
+    const offset = getEdgeY() - clientY;
+
+    const onMove = (clientY) => {
+      const desiredEdgeY = clientY + offset;
       const weekClientRect = ui.week.getBoundingClientRect();
       const desiredTime =
         (scaleBounds.startHour * 60)
@@ -178,8 +183,8 @@ function setHandleEventHandlers(handleElement, getEdgeY, setTime) {
       setTime(roundTo(5, desiredTime));
     };
 
-    document.onmousemove = onMove;
-    document.ontouchmove = onMove;
+    document.onmousemove = mouse(onMove);
+    document.ontouchmove = touch(onMove);
 
     const onStop = (e) => {
       e.preventDefault();
@@ -194,10 +199,10 @@ function setHandleEventHandlers(handleElement, getEdgeY, setTime) {
     document.onmouseup = onStop;
     document.ontouchend = onStop;
     document.ontouchcancel = onStop;
-
   };
-  handleElement.onmousedown = onStart;
-  handleElement.ontouchstart = onStart;
+
+  handleElement.onmousedown = mouse(onStart);
+  handleElement.ontouchstart = touch(onStart);
 }
 
 function roundTo(unit, value) {
